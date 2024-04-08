@@ -1,4 +1,4 @@
-# Prospero - Your Django Project
+# Prospero 
 
 A project aimed at bringing together some different sources of data on board games, and presenting them in an interesting way. 
 
