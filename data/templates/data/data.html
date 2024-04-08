@@ -1,0 +1,65 @@
+{% extends 'data/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Data Search Form</h2>
+<form method="post" id="apiSearchForm">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_method">API Method:</label>
+        {{ form.method }}
+    </div>
+    <div class="form-group">
+        <label for="id_modifier">Method Modifier:</label>
+        {{ form.modifier }}
+    </div>
+    <div class="form-group" id="modifierInput">
+        <!-- Dynamic input field will be populated here based on selected modifier -->
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if bgg_response %}
+    <div class="bgg-response">
+        {% for key, value in bgg_response.items %}
+            <div>
+                {% if key == 'plays' %}
+                    <h3>Plays Information</h3>
+                    <p><strong>Total Plays:</strong> {{ value.total_plays }}</p>
+                    <p><strong>Players:</strong></p>
+                    <ul>
+                        {% for player in value.players %}
+                            {% if player %}
+                                <li>{{ player }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% elif key == 'game' %}
+                    <h3>Game Comments</h3>
+                    <ul>
+                        {% for comment in value.comments %}
+                            <li>{{ comment }}</li>
+                        {% endfor %}
+                    </ul>
+                {% elif key == 'hot_items' %}
+                    <h3>Hot Items</h3>
+                    <ul>
+                        {% for item in value %}
+                            <li>{{ item.name }} (Rank: {{ item.rank }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <strong>{{ key }}:</strong> {{ value }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'dynamic_modifiers.js' %}"></script>
+    <script src="{% static 'bgg_api_form_submission.js' %}"></script>
+{% endblock scripts %}

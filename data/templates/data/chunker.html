@@ -1,0 +1,11 @@
+<!-- chunker.html adjustment -->
+{% extends 'website/base.html' %} 
+{% load static %}
+{% block content %}
+<h2> Select a game to pull chunk data for</h2>
+<form method="post">  <!-- Changed from "get" to "post" -->
+    {% csrf_token %}  <!-- Ensure CSRF token is included for POST requests -->
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+{% endblock %}

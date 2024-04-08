@@ -1,0 +1,11 @@
+{%  extends 'data/base.html' %}
+{% block content %}
+<h1>Hot Board Games</h1>
+<ul>
+{% for game in hot_games %}
+    <li>{{ game.name }}</li>
+{% empty %}
+    <li>No hot games found.</li>
+{% endfor %}
+</ul>
+{% endblock %}

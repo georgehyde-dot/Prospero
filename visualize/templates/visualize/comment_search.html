@@ -1,0 +1,36 @@
+<!-- comment_search.html -->
+
+{% extends 'website/base.html' %} 
+{% load static %}
+{% block content %}
+<h2>Search Games</h2>
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <h3>Results</h3>
+    {% if word_cloud %}
+
+    <div>
+    <h3>
+        Word Cloud
+    </h3>
+        <img src="/media/visualize/wordcloud.png" alt="Word Cloud">
+    </div>
+    {% endif %}
+    <ul>
+    {% for comment in results %}
+        <h4><strong>Game:</strong> {{ comment.game.game_name }}</h4>
+        <li>
+            <strong>User:</strong> {{ comment.username }}<br>
+            <strong>Comment:</strong> "{{ comment.comment }}"<br>
+            {% if comment.rating %}
+            <strong>Rating:</strong> {{comment.rating}}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

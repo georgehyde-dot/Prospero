@@ -1,0 +1,17 @@
+{% extends 'visualize/base.html' %}
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <!-- Bokeh Plot -->
+    <div class="bokeh-plot-container">
+        {{ div|safe }}
+    </div>
+    {{ script|safe }}
+{% else %}
+    <p>You must be logged in to view this content.</p>
+{% endif %}
+
+{% endblock %}

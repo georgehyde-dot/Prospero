@@ -1,0 +1,29 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h1>Thread Collector</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <h2>Thread Data</h2>
+    {% if thread_data != "Thead Collector Failed" %}
+        {% for thread in thread_data %}
+            <div class="thread-container">
+                <div class="thread-title">{{ thread.article }}</div>
+                <div class="thread-info">Posted by {{ thread.user.username }} on {{ thread.date_posted }}</div>
+                <div class="thread-body">{{ thread.body }}</div>
+            </div>
+        {% empty %}
+            <p>No threads to display.</p>
+        {% endfor %}
+    {% else %}
+        <p>Thread Collector Failed.</p>
+    {% endif %}
+{% endblock %}

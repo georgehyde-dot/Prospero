@@ -1,0 +1,59 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="container mt-4">
+        <h2>API Methods</h2>
+        <!-- API Methods Table -->
+        {% if apiMethods %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Method Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for method in apiMethods %}
+                        <tr>
+                            <td>{{ method.name }}</td>
+                            <td>{{ method.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No API methods available.</p>
+        {% endif %}
+
+        <h2>API Method Modifiers</h2>
+        <!-- API Method Modifiers Table -->
+        {% if apiMethodModifiers %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Modifier Name</th>
+                        <th>Modifier Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for modifier in apiMethodModifiers %}
+                        <tr>
+                            <td>{{ modifier.method.name }}</td>
+                            <td>{{ modifier.modifier_name }}</td>
+                            <td>{{ modifier.modifier_type }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No API method modifiers available.</p>
+        {% endif %}
+    </div>
+
+{% endif %}
+
+{% endblock %}

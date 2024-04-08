@@ -1,0 +1,17 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h2>Search History</h2>
+    <div class="search-history">
+        {% for log in logs %}
+            <div class="log-entry">
+                <h3>Search ID: {{ log.id }}</h3>
+                <p><strong>Request:</strong> {{ log.search_request }}</p>
+                <p><strong>Response:</strong> {{ log.search_response }}</p>
+                <p><strong>Date:</strong> {{ log.created_at }}</p>
+            </div>
+        {% empty %}
+            <p>No search history found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

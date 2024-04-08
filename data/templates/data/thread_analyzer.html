@@ -1,0 +1,27 @@
+{% extends 'data/base.html' %}
+
+{% block content %}
+    <h1>Thread Analyzer</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <h2>Thread Analysis</h2>
+    {% if analysis %}
+        {% for item in analysis %}
+            <div class="analysis-container">
+                <div class="thread-title">{{ item }}</div>                
+            </div>
+        {% empty %}
+            <p>No threads to display.</p>
+        {% endfor %}
+    {% else %}
+        <p>Thread Collector Failed.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+version: "3.9"  # Ensure compatibility with your Docker Compose version
+
+services:  
+  django:
+    build: .  # Build from the Dockerfile in the current directory
+    ports:
+      - "8000:8000"  # Map the container's exposed port to your host machine
+    volumes:
+      - .:/app  # Mount your project code as a volume for live updates during development
+    env_file:
+      - .env
+  db:
+    image: postgres:15  # Or your preferred version
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}  
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}  
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistent data storage
+  rabbitmq:
+    image: rabbitmq:3-management  # Provides a management interface
+    ports:
+      - "5672:5672"  # Default RabbitMQ port
+      - "15672:15672" 
+volumes:
+  postgres_data: 

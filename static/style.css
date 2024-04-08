@@ -1,0 +1,13 @@
+.user-info, .hot-items, .plays-info, .game-comments {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #333;
+}
+
+ol, ul {
+    margin-left: 20px;
+}
